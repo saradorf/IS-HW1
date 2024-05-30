@@ -25,7 +25,7 @@ my_function:
     CMP EBX, 1
     JL ZERO
 
-    # loop from one to EBX and find the square of the number
+    # loop untill EAX ** 2 >= EBX
     MOV EAX, 0
     LOOP:
         INC EAX
@@ -35,10 +35,11 @@ my_function:
         JE END
         JL LOOP
     
+    # we get to ZERO only if ECX > EBX
     ZERO:
-        MOV EAX, 0
-        JMP END
+        MOV EAX, 0 
 
+    # we get to END when EAX has the correct value
     END:
         POP ECX
         POP EBX
