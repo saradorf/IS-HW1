@@ -16,3 +16,46 @@ my_function:
     # 2. Save the result in the register EAX (and then return!).
     # 3. Make sure to include a recursive function call (the recursive function
     #    can be this function, or a helper function defined later in this file).
+    PUSH EBP
+    MOV EBP, ESP
+    PUSH EBX
+    PUSH EDX
+
+    # Read the input to the function from the stack (n)
+    MOV EBX, [EBP + 8]
+
+    # Base case: n = 0
+    MOV EAX, 0
+    CMP EBX, 0
+    JLE END
+
+    # Base case: n = 1
+    MOV EAX, 1
+    CMP EBX, 1
+    JE END
+
+    # Recursive case: n -1
+    DEC EBX
+    PUSH EBX
+    CALL my_function
+    ADD ESP, 4
+
+    MOV EDX, EAX
+    IMUL EDX, EAX
+
+    # Recursive case: n -2
+    MOV EBX, [EBP + 8]
+    SUB EBX, 2
+    PUSH EBX
+    CALL my_function
+    ADD ESP, 4
+    IMUL EAX, EAX
+
+    ADD EAX, EDX
+
+    END:
+        POP EDX
+        POP EBX
+        MOV ESP, EBP
+        POP EBP
+        RET
