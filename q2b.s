@@ -37,7 +37,7 @@ my_function:
     MOV ECX, 2
     MOV EDX, 1
     MOV EAX, 1
-    # EAX is an-1, EDX is an-2, start start from n = 2
+    # EAX is an-1, EDX is an-2, start from n = 2
     LOOP:
         CMP ECX, EBX
         JGE END

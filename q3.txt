@@ -1,0 +1,6 @@
+The main idea is that this is a concatination program.
+The program starts at adress EDI and searches for a zero byte(null terminator) and copies all bytes from ESI, including the ending zero byte(the null terminator). (EDI's null terminator is not included). 
+In elaboration - 
+The program gets an adress in EDI and checks if it is zero (and goes to _LABEL2 if it is). 
+Then it starts incrementing it by 1 byte at a time (in _LABEL1 loop), untill it reaches the adress (denoted by x) of a byte that stores a value that is equal to zero (the value is compared to DL, which is the first byte of EDX. EDX has been xored with itself and therefore is equal to zero, making DL zero as well). 
+Finally, in _LABEL2 loop -  we use AL, which is the first byte of EAX, to copy all bytes of ESI (untill we reach a byte that stores a value that is equal zero) to the bytes that start from the adress x going forward. (the ending zero byte is included)
