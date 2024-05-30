@@ -19,7 +19,7 @@ my_function:
     # 1. Read the input to the function from EBX.
     # 2. Save the result in the register EAX.
     PUSH EBX
-    PUSH ECX
+    PUSH EDX
     MOV EBX, DWORD PTR [ESP + 12]
     
     CMP EBX, 1
@@ -29,19 +29,19 @@ my_function:
     MOV EAX, 0
     LOOP:
         INC EAX
-        MOV ECX, EAX
-        IMUL ECX, EAX
-        CMP ECX, EBX
+        MOV EDX, EAX
+        IMUL EDX, EAX
+        CMP EDX, EBX
         JE END
         JL LOOP
     
-    # we get to ZERO only if ECX > EBX
+    # we get to ZERO only if EDX > EBX
     ZERO:
         MOV EAX, 0 
 
     # we get to END when EAX has the correct value
     END:
-        POP ECX
+        POP EDX
         POP EBX
 
 
