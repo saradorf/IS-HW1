@@ -34,23 +34,29 @@ my_function:
     CMP EBX, 1
     JE END
 
-    # Recursive case: n -1
+    # Recursive case: n - 1
     DEC EBX
+    # we want the value of EBX (n-1) to be passed to the next function call
     PUSH EBX
     CALL my_function
-    ADD ESP, 4
+    # clean the stack after the function call
+    POP EBX
 
+    # save the result ** 2 in EDX
     MOV EDX, EAX
     IMUL EDX, EAX
 
-    # Recursive case: n -2
-    MOV EBX, [EBP + 8]
-    SUB EBX, 2
+    # Recursive case: n - 2
+    DEC EBX
+    # we want the value of EBX (n-2) to be passed to the next function call
     PUSH EBX
     CALL my_function
+    # clean the stack after the function call
     ADD ESP, 4
+    # save the result ** 2 in EAX
     IMUL EAX, EAX
 
+    # Add the two results
     ADD EAX, EDX
 
     END:
