@@ -37,13 +37,17 @@ my_function:
     MOV ECX, 2
     MOV EDX, 1
     MOV EAX, 1
+    # EAX is an-1, EDX is an-2, start start from n = 2
     LOOP:
         CMP ECX, EBX
         JGE END
+        # save an-1 
         PUSH EAX
         IMUL EAX, EAX
         IMUL EDX, EDX
+        # an = an-1 ** 2 + an-2 ** 2
         ADD EAX, EDX
+        # EDX is now an-1 (it receives the previous value of EAX)
         POP EDX
         INC ECX
         JMP LOOP
