@@ -32,7 +32,7 @@ my_function:
         IMUL ECX, EAX
         CMP ECX, EBX
         JE END
-        JB LOOP
+        JL LOOP
     
     ZERO:
         MOV EAX, 0
